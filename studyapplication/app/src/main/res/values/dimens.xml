@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="imageViewHeight">200dp</dimen>
+    <dimen name="playBtnSise">32dp</dimen>
+    <dimen name="textViewPadding">4dp</dimen>
+    <dimen name="linearLayoutPadding">16dp</dimen>
+    <dimen name="linearLayoutMargin">16dp</dimen>
+</resources>

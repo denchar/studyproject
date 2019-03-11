@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+    <android.support.v4.widget.NestedScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fillViewport="true"
+    >
+
+
+        <LinearLayout
+                xmlns:tools="http://schemas.android.com/tools"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                tools:context=".MovieDetailActivity">
+
+            <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginBottom="@dimen/linearLayoutMargin"
+            >
+                <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/imageViewHeight"
+                        android:id="@+id/poster_image_view"
+                        android:layout_weight="3"
+                        android:layout_margin="@dimen/cardview_default_radius"
+                />
+                <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="200dp"
+                        android:orientation="vertical"
+                        android:layout_weight="2"
+                        android:padding="@dimen/linearLayoutPadding">
+                    <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/movie_title_text_view"
+                            android:text="title"
+                            android:textColor="@color/colorAccent"
+                    />
+                    <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/release_date_text_view"
+                            android:text="@string/release"
+                    />
+
+
+                    <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/movie_vote_average_text_view"
+                            android:text="vote_average"
+                    />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/overview_text_view"
+                    android:text="text"
+                    android:layout_margin="@dimen/cardview_default_radius"
+                    android:padding="@dimen/textViewPadding"
+            />
+            <FrameLayout android:layout_width="match_parent"
+                         android:layout_height="@dimen/cardview_default_radius"
+                         android:background="@color/colorPrimary"
+                         android:layout_margin="@dimen/cardview_default_radius"
+            >
+            </FrameLayout>
+            <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/trailers_text_view"
+                    android:text="@string/trailers"
+                    android:textColor="@color/colorAccent"
+                    android:gravity="center"
+
+            />
+            <ProgressBar
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:id="@+id/trailers_progress_bar"
+                    android:visibility="gone"
+                    android:layout_gravity="center"
+            />
+            <android.support.v7.widget.RecyclerView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/trailers_recycler_view"
+            />
+            <FrameLayout android:layout_width="match_parent"
+                         android:layout_height="@dimen/cardview_default_radius"
+                         android:background="@color/colorPrimary"
+                         android:layout_margin="@dimen/cardview_default_radius"
+            >
+            </FrameLayout>
+            <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/review_text_view"
+                    android:text="@string/reviews"
+                    android:textColor="@color/colorAccent"
+                    android:gravity="center"
+            />
+            <ProgressBar
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:id="@+id/reviews_progress_bar"
+                    android:visibility="gone"
+                    android:layout_gravity="center"
+            />
+            <android.support.v7.widget.RecyclerView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/reviews_recycler_view"
+            />
+        </LinearLayout>
+    </android.support.v4.widget.NestedScrollView>
+</FrameLayout>

@@ -1,0 +1,13 @@
+<resources>
+    <string name="app_name">StudyApplication</string>
+    <string name="api_key">35ffe1c2c8248e38e4cbb1a187bee8e8</string>
+    <string name="base_image_url">http://image.tmdb.org/t/p/</string>
+    <string name="recomended_image_size">w185</string>
+    <string name="no_сonnection">Нет подключения к интернету</string>
+    <string name="trailers">Трейлеры:</string>
+    <string name="reviews">Обзоры:</string>
+    <string name="release">Премьера:</string>
+    <string name="vote_average">Рейтинг:</string>
+    <string name="from_ten">"/10"</string>
+    <string name="youtube_url">http://www.youtube.com/watch?v=</string>
+</resources>
