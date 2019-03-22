@@ -7,9 +7,12 @@ import com.example.studyapplication.presenters.MovieDetailPresenter
 import com.example.studyapplication.retrofit.ApiRetrofitClient
 import com.example.studyapplication.retrofit.ApiRetrofitInterface
 import com.example.studyapplication.viewInterfaces.MovieDetailInterface
+import io.reactivex.Observer
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
+import io.reactivex.disposables.Disposable
 import io.reactivex.schedulers.Schedulers
+
 
 class MovieDetailModel(private val presenter: MovieDetailPresenter) : MovieDetailInterface.Model {
 
@@ -28,9 +31,10 @@ class MovieDetailModel(private val presenter: MovieDetailPresenter) : MovieDetai
             api.getMovieReview(id, Values.API_KEY)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe { result ->
-                    printResult(result)
-                }
+                .subscribe({ result -> printResult(result) }, {
+                    println(Throwable::message)
+                    sendErrResultReviews()
+                })
         )
     }
 
@@ -42,11 +46,13 @@ class MovieDetailModel(private val presenter: MovieDetailPresenter) : MovieDetai
             api.getMovieVideos(id, Values.API_KEY)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe { result ->
-                    printVideos(result)
-                }
+                .subscribe({ result -> printVideos(result) }, {
+                    println(Throwable::message)
+                    sendErrResultVideos()
+                })
         )
     }
+
 
     private fun printVideos(result: MovieVideoModel) {
         presenter.returnResultVideos(result.results)
@@ -54,6 +60,14 @@ class MovieDetailModel(private val presenter: MovieDetailPresenter) : MovieDetai
 
     private fun printResult(result: MovieReviewModel) {
         presenter.returnResultReviews(result.results)
+    }
+
+    private fun sendErrResultVideos() {
+        presenter.returnErrResultVideos()
+    }
+
+    private fun sendErrResultReviews() {
+        presenter.returnErrResultReviews()
     }
 
     override fun clearDisposable() {

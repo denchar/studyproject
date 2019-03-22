@@ -11,12 +11,16 @@ interface MovieDetailInterface {
         fun stopProgressReview()
         fun showResultReview(review: ArrayList<MovieReviewModel.Result>)
         fun showResultVideo(video: ArrayList<MovieVideoModel.Result>)
+        fun showErrResultVideos()
+        fun showErrResultReviews()
     }
 
     interface Presenter {
         fun getRequest(id: Int, video: Boolean)
         fun returnResultVideos(video: ArrayList<MovieVideoModel.Result>)
         fun returnResultReviews(review: ArrayList<MovieReviewModel.Result>)
+        fun returnErrResultVideos()
+        fun returnErrResultReviews()
         fun clearDisposable()
     }
 

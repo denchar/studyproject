@@ -7,6 +7,7 @@ import com.example.studyapplication.viewInterfaces.MovieDetailInterface
 
 class MovieDetailPresenter() : MovieDetailInterface.Presenter {
 
+
     lateinit var view: MovieDetailInterface.ViewInterface
     lateinit var model: MovieDetailInterface.Model
 
@@ -25,7 +26,13 @@ class MovieDetailPresenter() : MovieDetailInterface.Presenter {
         view.showResultReview(review)
         view.stopProgressReview()
     }
+    override fun returnErrResultVideos() {
+        view.showErrResultVideos()
+    }
 
+    override fun returnErrResultReviews() {
+       view.showErrResultReviews()
+    }
     constructor(view: MovieDetailInterface.ViewInterface) : this() {
         this.view = view
         this.model = MovieDetailModel(this)

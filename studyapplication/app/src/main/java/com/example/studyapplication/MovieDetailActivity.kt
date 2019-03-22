@@ -2,11 +2,13 @@ package com.example.studyapplication
 
 import android.content.Context
 import android.content.Intent
+import android.net.ConnectivityManager
 import android.net.Uri
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.support.v7.widget.LinearLayoutManager
 import android.view.View
+import android.widget.Toast
 import com.example.studyapplication.MovieModels.MovieReviewModel
 import com.example.studyapplication.MovieModels.MovieVideoModel
 import com.example.studyapplication.presenters.MovieDetailPresenter
@@ -14,10 +16,12 @@ import com.example.studyapplication.recyclerViews.DetailReviewRecyclerViewAdapte
 import com.example.studyapplication.recyclerViews.DetailTrailersRecyclerViewAdapter
 import com.example.studyapplication.viewInterfaces.MovieDetailInterface
 import com.squareup.picasso.Picasso
+import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.activity_movie_detail.*
 
 class MovieDetailActivity : AppCompatActivity(), MovieDetailInterface.ViewInterface,
     DetailTrailersRecyclerViewAdapter.ViewHolderClickListener {
+
 
     lateinit var presenter: MovieDetailPresenter
 
@@ -26,11 +30,25 @@ class MovieDetailActivity : AppCompatActivity(), MovieDetailInterface.ViewInterf
         setContentView(R.layout.activity_movie_detail)
 
         presenter = MovieDetailPresenter(this)
-        presenter.getRequest(
-            intent.getIntExtra(ID, Values.DEFAULT_ID),
-            intent.getBooleanExtra(VIDEO, false)
-        )
+        if (isOnline(applicationContext)) {
+            presenter.getRequest(
+                intent.getIntExtra(ID, Values.DEFAULT_ID),
+                intent.getBooleanExtra(VIDEO, false)
+            )
+        } else {
+            Toast.makeText(applicationContext, R.string.no_сonnection, Toast.LENGTH_SHORT).show()
+        }
         setMovieInfo()
+    }
+
+    private fun isOnline(context: Context): Boolean {
+        var network = false
+        val cm = context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+        val netInfo = cm.activeNetworkInfo
+        if (netInfo != null && netInfo.isConnected) {
+            network = true
+        }
+        return network
     }
 
     private fun setMovieInfo() {
@@ -52,6 +70,7 @@ class MovieDetailActivity : AppCompatActivity(), MovieDetailInterface.ViewInterf
         release_date_text_view.text = stringRelease
         movie_vote_average_text_view.text = stringVoteAverage
         overview_text_view.text = intent.getStringExtra(OVERVIEW)
+
     }
 
     override fun startProgressVideo() {
@@ -91,6 +110,14 @@ class MovieDetailActivity : AppCompatActivity(), MovieDetailInterface.ViewInterf
                 Uri.parse(this.resources.getString(R.string.youtube_url) + result.key)
             )
         )
+    }
+
+    override fun showErrResultVideos() {
+        err_video_text_view.visibility = View.VISIBLE
+    }
+
+    override fun showErrResultReviews() {
+        err_review_text_view.visibility = View.VISIBLE
     }
 
     companion object {
