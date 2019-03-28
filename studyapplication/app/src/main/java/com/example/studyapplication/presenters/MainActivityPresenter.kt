@@ -7,6 +7,7 @@ import com.example.studyapplication.viewInterfaces.MainInterface
 
 class MainActivityPresenter() : MainInterface.Presenter {
 
+
     lateinit var view: MainInterface.ViewInterface
     lateinit var model: MainInterface.Model
 
@@ -18,6 +19,10 @@ class MainActivityPresenter() : MainInterface.Presenter {
     override fun returnResultPopular(list: ArrayList<MovieModel>) {
         view.showResultPopular(list)
         view.stopProgress()
+    }
+
+    override fun returnErrResult() {
+        view.showErrResult()
     }
 
     constructor(view: MainInterface.ViewInterface) : this() {

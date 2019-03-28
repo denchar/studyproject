@@ -16,6 +16,7 @@ import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity(), MainInterface.ViewInterface, MainRecyclerViewAdapter.ViewHolderClickListener {
 
+
     lateinit var presenter: MainActivityPresenter
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -27,9 +28,10 @@ class MainActivity : AppCompatActivity(), MainInterface.ViewInterface, MainRecyc
             presenter.getPopular()
         } else {
             Toast.makeText(applicationContext, R.string.no_сonnection, Toast.LENGTH_SHORT).show()
-            no_connect_text_view.visibility = View.VISIBLE
+            showConnectionErr()
         }
     }
+
 
     private fun isOnline(context: Context): Boolean {
         var network = false
@@ -70,6 +72,14 @@ class MainActivity : AppCompatActivity(), MainInterface.ViewInterface, MainRecyc
             item.overview,
             item.release_date
         )
+    }
+
+    override fun showErrResult() {
+        server_err_text_view.visibility = View.VISIBLE
+    }
+
+    private fun showConnectionErr() {
+        no_connect_text_view.visibility = View.VISIBLE
     }
 
     override fun onDestroy() {

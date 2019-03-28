@@ -14,6 +14,7 @@ import io.reactivex.schedulers.Schedulers
 
 class MainActivityModel(private val presenter: MainActivityPresenter) : MainInterface.Model {
 
+
     lateinit var api: ApiRetrofitInterface
     var compositeDisposable = CompositeDisposable()
     override fun getRequest() {
@@ -22,14 +23,24 @@ class MainActivityModel(private val presenter: MainActivityPresenter) : MainInte
             api.getPopular(Values.API_KEY)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe { result ->
-                    printResult(result)
-                }
+                .subscribe(
+                    { printResult(it) },
+                    {
+                        it.printStackTrace()
+                        sendErrResult()
+                    },
+                    { println("Done!") }
+                )
+
         )
     }
 
     private fun printResult(result: MovieResponceModel) {
         presenter.returnResultPopular(result.results)
+    }
+
+    override fun sendErrResult() {
+        presenter.returnErrResult()
     }
 
     override fun clearDisposable() {
